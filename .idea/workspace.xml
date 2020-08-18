@@ -54,21 +54,22 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Basic commits" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basic commits" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="410" y="127" key="CommitChangelistDialog2" timestamp="1597766634949">
+    <state x="410" y="127" key="CommitChangelistDialog2" timestamp="1597785622948">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="410" y="127" key="CommitChangelistDialog2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597766634949" />
+    <state x="410" y="127" key="CommitChangelistDialog2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597785622948" />
     <state x="328" y="190" key="SettingsEditor" timestamp="1597766381797">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="328" y="190" key="SettingsEditor/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597766381797" />
-    <state x="419" y="291" key="Vcs.Push.Dialog.v2" timestamp="1597766642154">
+    <state x="419" y="291" key="Vcs.Push.Dialog.v2" timestamp="1597785630655">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="419" y="291" key="Vcs.Push.Dialog.v2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597766642154" />
+    <state x="419" y="291" key="Vcs.Push.Dialog.v2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597785630655" />
     <state x="484" y="258" key="search.everywhere.popup" timestamp="1597766945908">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
