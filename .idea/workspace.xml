@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f8278211-6b53-4917-8b91-5e345fb18ba7" name="Default Changelist" comment="" />
+    <list default="true" id="f8278211-6b53-4917-8b91-5e345fb18ba7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hook.go" beforeDir="false" afterPath="$PROJECT_DIR$/hook.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin.go" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,7 +43,7 @@
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
@@ -53,17 +57,21 @@
     <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="410" y="127" key="CommitChangelistDialog2" timestamp="1597766231715">
+    <state x="410" y="127" key="CommitChangelistDialog2" timestamp="1597766634949">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="410" y="127" key="CommitChangelistDialog2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597766231715" />
+    <state x="410" y="127" key="CommitChangelistDialog2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597766634949" />
     <state x="328" y="190" key="SettingsEditor" timestamp="1597766381797">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="328" y="190" key="SettingsEditor/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597766381797" />
-    <state x="419" y="291" key="Vcs.Push.Dialog.v2" timestamp="1597766241895">
+    <state x="419" y="291" key="Vcs.Push.Dialog.v2" timestamp="1597766642154">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="419" y="291" key="Vcs.Push.Dialog.v2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597766241895" />
+    <state x="419" y="291" key="Vcs.Push.Dialog.v2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597766642154" />
+    <state x="484" y="258" key="search.everywhere.popup" timestamp="1597766945908">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="484" y="258" key="search.everywhere.popup/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597766945908" />
   </component>
 </project>
