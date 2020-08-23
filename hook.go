@@ -1,3 +1,4 @@
 package EComBase
 
-type HookCallback func(interface{}) (bool, error)
+type HookPayload interface {
+}
