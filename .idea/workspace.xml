@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8278211-6b53-4917-8b91-5e345fb18ba7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/basicauth.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hook.go" beforeDir="false" afterPath="$PROJECT_DIR$/hook.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin.go" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,21 +58,25 @@
     <option name="LAST_COMMIT_MESSAGE" value="Basic commits" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="410" y="127" key="CommitChangelistDialog2" timestamp="1597785622948">
+    <state x="410" y="127" key="CommitChangelistDialog2" timestamp="1597785749118">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="410" y="127" key="CommitChangelistDialog2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597785622948" />
+    <state x="410" y="127" key="CommitChangelistDialog2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597785749118" />
     <state x="328" y="190" key="SettingsEditor" timestamp="1597766381797">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="328" y="190" key="SettingsEditor/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597766381797" />
-    <state x="419" y="291" key="Vcs.Push.Dialog.v2" timestamp="1597785630655">
+    <state x="419" y="291" key="Vcs.Push.Dialog.v2" timestamp="1597785754480">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="419" y="291" key="Vcs.Push.Dialog.v2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597785630655" />
-    <state x="484" y="258" key="search.everywhere.popup" timestamp="1597766945908">
+    <state x="419" y="291" key="Vcs.Push.Dialog.v2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597785754480" />
+    <state width="600" height="428" key="javadoc.popup" timestamp="1597994667423">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="484" y="258" key="search.everywhere.popup/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597766945908" />
+    <state width="600" height="428" key="javadoc.popup/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597994667423" />
+    <state x="484" y="258" width="670" height="676" key="search.everywhere.popup" timestamp="1597994457241">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="484" y="258" width="670" height="676" key="search.everywhere.popup/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1597994457241" />
   </component>
 </project>
