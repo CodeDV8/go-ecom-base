@@ -38,7 +38,7 @@ func TestNodeBalance(t *testing.T) {
 	first.Add("T", nil)
 	first.Add("X", nil)
 
-	balanced, balancedErr := first.Balance()
+	balanced, balancedErr := first.Balance(28)
 	if balancedErr != nil {
 		t.Error("Balance failed")
 	} else if balanced == nil {

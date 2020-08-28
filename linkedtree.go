@@ -3,28 +3,53 @@ package EComBase
 import (
 	"fmt"
 	"strings"
+	"sync"
 )
 
 // TODO - Add mutex?
 
 type LinkedTree struct {
-	root *LinkedTreeNode
+	root  *LinkedTreeNode
+	count int64
+	mux   sync.Mutex
 }
 
 func (tree *LinkedTree) Add(key string, data interface{}) (bool, error) {
+	tree.mux.Lock()
+	defer tree.mux.Unlock()
 	if tree.root == nil {
 		tree.root = &LinkedTreeNode{
 			Key:  key,
 			Data: data,
 		}
+		tree.count = 1
 		return true, nil
 	}
-	return tree.root.Add(key, data)
+	ok, err := tree.root.Add(key, data)
+	if ok == true {
+		tree.count += 1
+	}
+	return ok, err
+}
+
+func (tree *LinkedTree) Delete(key string) (bool, error) {
+	tree.mux.Lock()
+	defer tree.mux.Unlock()
+	node, err := tree.FindNode(key)
+	if err != nil {
+		return false, err
+	}
+	node.Deleted = true
+	tree.count--
+	return true, nil
 }
 
 func (tree *LinkedTree) Balance() (*LinkedTreeNode, error) {
+	tree.mux.Lock()
+	defer tree.mux.Unlock()
 	if tree.root != nil {
-		node, err := tree.root.Balance()
+		node, err, nodeCount := tree.root.Balance(tree.count)
+		tree.count = nodeCount
 		if err != nil {
 			return nil, err
 		}
@@ -35,6 +60,8 @@ func (tree *LinkedTree) Balance() (*LinkedTreeNode, error) {
 }
 
 func (tree *LinkedTree) GetRootNode() (*LinkedTreeNode, error) {
+	tree.mux.Lock()
+	defer tree.mux.Unlock()
 	if tree.root != nil {
 		return tree.root, nil
 	}
@@ -42,6 +69,8 @@ func (tree *LinkedTree) GetRootNode() (*LinkedTreeNode, error) {
 }
 
 func (tree *LinkedTree) GetFirstNode() (*LinkedTreeNode, error) {
+	tree.mux.Lock()
+	defer tree.mux.Unlock()
 	if tree.root != nil {
 		return tree.root.GetFirstNode()
 	}
@@ -49,6 +78,8 @@ func (tree *LinkedTree) GetFirstNode() (*LinkedTreeNode, error) {
 }
 
 func (tree *LinkedTree) GetLastNode() (*LinkedTreeNode, error) {
+	tree.mux.Lock()
+	defer tree.mux.Unlock()
 	if tree.root != nil {
 		return tree.root.GetLastNode()
 	}
@@ -56,6 +87,8 @@ func (tree *LinkedTree) GetLastNode() (*LinkedTreeNode, error) {
 }
 
 func (tree *LinkedTree) FindNode(key string) (*LinkedTreeNode, error) {
+	tree.mux.Lock()
+	defer tree.mux.Unlock()
 	if tree.root != nil {
 		return tree.root.FindNode(key)
 	}
@@ -63,13 +96,15 @@ func (tree *LinkedTree) FindNode(key string) (*LinkedTreeNode, error) {
 }
 
 type LinkedTreeNode struct {
-	Parent *LinkedTreeNode
-	Next   *LinkedTreeNode
-	Right  *LinkedTreeNode
-	Left   *LinkedTreeNode
-	Prev   *LinkedTreeNode
-	Key    string
-	Data   interface{}
+	Parent   *LinkedTreeNode
+	Next     *LinkedTreeNode
+	Right    *LinkedTreeNode
+	Left     *LinkedTreeNode
+	Prev     *LinkedTreeNode
+	Key      string
+	Data     interface{}
+	Wildcard bool
+	Deleted  bool
 }
 
 func (lt *LinkedTreeNode) Add(key string, data interface{}) (bool, error) {
@@ -80,18 +115,32 @@ func (lt *LinkedTreeNode) Add(key string, data interface{}) (bool, error) {
 }
 
 func (lt *LinkedTreeNode) add(key string, data interface{}) (bool, error) {
+	var wildcard = false
+	var addKey = ""
+	if key[len(key)-1:] == "*" {
+		addKey = key[:len(key)-1]
+		wildcard = true
+	} else {
+		addKey = key
+	}
 	cmp := strings.Compare(lt.Key, key)
 	if cmp == 0 {
+		if lt.Deleted == true {
+			lt.Deleted = false
+			lt.Data = data
+			return true, nil
+		}
 		return false, nil
 	}
 	if cmp > 0 {
 		if lt.Left == nil {
 			lt.Left = &LinkedTreeNode{
-				Parent: lt,
-				Prev:   lt.Prev,
-				Next:   lt,
-				Key:    key,
-				Data:   data,
+				Parent:   lt,
+				Prev:     lt.Prev,
+				Next:     lt,
+				Key:      addKey,
+				Data:     data,
+				Wildcard: wildcard,
 			}
 			if lt.Prev != nil {
 				lt.Prev.Next = lt.Left
@@ -103,11 +152,12 @@ func (lt *LinkedTreeNode) add(key string, data interface{}) (bool, error) {
 	}
 	if lt.Right == nil {
 		lt.Right = &LinkedTreeNode{
-			Parent: lt,
-			Next:   lt.Next,
-			Prev:   lt,
-			Key:    key,
-			Data:   data,
+			Parent:   lt,
+			Next:     lt.Next,
+			Prev:     lt,
+			Key:      addKey,
+			Data:     data,
+			Wildcard: wildcard,
 		}
 		if lt.Next != nil {
 			lt.Next.Prev = lt.Right
@@ -168,8 +218,20 @@ func (lt *LinkedTreeNode) FindNode(key string) (*LinkedTreeNode, error) {
 }
 
 func (lt *LinkedTreeNode) findNode(key string) (*LinkedTreeNode, error) {
-	cmp := strings.Compare(lt.Key, key)
+	var cmp int
+	if lt.Wildcard == true {
+		if len(key) >= len(lt.Key) {
+			cmp = strings.Compare(lt.Key, key[:len(lt.Key)])
+		} else {
+			cmp = strings.Compare(lt.Key, key)
+		}
+	} else {
+		cmp = strings.Compare(lt.Key, key)
+	}
 	if cmp == 0 {
+		if lt.Deleted == true {
+			return nil, fmt.Errorf("Node is deleted")
+		}
 		return lt, nil
 	}
 	if cmp > 0 {
@@ -184,21 +246,26 @@ func (lt *LinkedTreeNode) findNode(key string) (*LinkedTreeNode, error) {
 	return nil, nil
 }
 
-func (lt *LinkedTreeNode) Balance() (*LinkedTreeNode, error) {
-	var list []*LinkedTreeNode
-
+func (lt *LinkedTreeNode) Balance(size int64) (*LinkedTreeNode, error, int64) {
+	// list := make([]*LinkedTreeNode, size)
+	list := []*LinkedTreeNode{}
 	node, err := lt.GetFirstNode()
 	if err != nil {
-		return nil, err
+		return nil, err, 0
 	}
+	var nodeCount int64 = 0
 	for node != nil {
 		node.Parent = nil
 		node.Left = nil
 		node.Right = nil
-		list = append(list, node)
+		if lt.Deleted == false {
+			list = append(list, node)
+			nodeCount++
+		}
 		node = node.Next
 	}
-	return lt.balance(list)
+	node, err = lt.balance(list)
+	return node, err, nodeCount
 }
 
 func (lt *LinkedTreeNode) balance(list []*LinkedTreeNode) (*LinkedTreeNode, error) {
