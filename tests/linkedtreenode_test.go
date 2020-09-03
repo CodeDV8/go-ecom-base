@@ -1,12 +1,13 @@
 package tests_test
 
 import (
-	EComBase "github.com/codedv8/go-ecom-base"
 	"testing"
+
+	ecombase "github.com/codedv8/go-ecom-base"
 )
 
 func TestTreeNode(t *testing.T) {
-	node := &EComBase.LinkedTreeNode{
+	node := &ecombase.LinkedTreeNode{
 		Key:  "F",
 		Data: "xxx",
 	}

@@ -1,12 +1,13 @@
 package tests_test
 
 import (
-	EComBase "github.com/codedv8/go-ecom-base"
 	"testing"
+
+	ecombase "github.com/codedv8/go-ecom-base"
 )
 
 func TestTree(t *testing.T) {
-	tree := &EComBase.LinkedTree{}
+	tree := &ecombase.LinkedTree{}
 
 	ok, err := tree.Add("A", "Whatever")
 	if ok == false {

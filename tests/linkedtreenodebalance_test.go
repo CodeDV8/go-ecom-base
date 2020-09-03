@@ -3,11 +3,11 @@ package tests_test
 import (
 	"testing"
 
-	EComBase "github.com/codedv8/go-ecom-base"
+	ecombase "github.com/codedv8/go-ecom-base"
 )
 
 func TestNodeBalance(t *testing.T) {
-	first := &EComBase.LinkedTreeNode{
+	first := &ecombase.LinkedTreeNode{
 		Key: "K",
 	}
 	first.Add("O", nil)

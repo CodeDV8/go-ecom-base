@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f8278211-6b53-4917-8b91-5e345fb18ba7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linkedtree.go" beforeDir="false" afterPath="$PROJECT_DIR$/linkedtree.go" afterDir="false" />
-    </list>
+    <list default="true" id="f8278211-6b53-4917-8b91-5e345fb18ba7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,18 +66,18 @@
     <option name="LAST_COMMIT_MESSAGE" value="Added some comments" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="410" y="127" key="CommitChangelistDialog2" timestamp="1599146418366">
+    <state x="410" y="127" key="CommitChangelistDialog2" timestamp="1599146488568">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="410" y="127" key="CommitChangelistDialog2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1599146418366" />
+    <state x="410" y="127" key="CommitChangelistDialog2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1599146488568" />
     <state x="328" y="190" key="SettingsEditor" timestamp="1598191765761">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="328" y="190" key="SettingsEditor/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598191765761" />
-    <state x="419" y="291" key="Vcs.Push.Dialog.v2" timestamp="1599146426383">
+    <state x="419" y="291" key="Vcs.Push.Dialog.v2" timestamp="1599146493993">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
-    <state x="419" y="291" key="Vcs.Push.Dialog.v2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1599146426383" />
+    <state x="419" y="291" key="Vcs.Push.Dialog.v2/213.1103.1440.877/137.-1027.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1599146493993" />
     <state width="600" height="428" key="javadoc.popup" timestamp="1597994667423">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>

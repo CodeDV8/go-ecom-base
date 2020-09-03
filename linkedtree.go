@@ -1,4 +1,4 @@
-package EComBase
+package ecombase
 
 import (
 	"fmt"

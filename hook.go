@@ -1,4 +1,4 @@
-package EComBase
+package ecombase
 
 // HookPayload - Struct that defines the HookPayload
 type HookPayload interface {

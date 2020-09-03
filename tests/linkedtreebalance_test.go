@@ -1,12 +1,13 @@
 package tests_test
 
 import (
-	EComBase "github.com/codedv8/go-ecom-base"
 	"math/rand"
 	"runtime"
 	"strings"
 	"testing"
 	"time"
+
+	ecombase "github.com/codedv8/go-ecom-base"
 )
 
 func TestListSize(t *testing.T) {
@@ -27,7 +28,7 @@ func TestListSize(t *testing.T) {
 }
 
 func TestLargeSetBalance(t *testing.T) {
-	tree := &EComBase.LinkedTree{}
+	tree := &ecombase.LinkedTree{}
 	n := 0
 	start := time.Now()
 	for i := 0; i < 129418; i++ {
@@ -57,7 +58,7 @@ func TestLargeSetBalance(t *testing.T) {
 }
 
 func TestBalance(t *testing.T) {
-	tree := &EComBase.LinkedTree{}
+	tree := &ecombase.LinkedTree{}
 	tree.Add("O", nil)
 	tree.Add("C", nil)
 	tree.Add("K", nil)

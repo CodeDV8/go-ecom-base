@@ -1,4 +1,4 @@
-package EComBase
+package ecombase
 
 // Plugin - The definition of the plugin interface
 type Plugin interface {
