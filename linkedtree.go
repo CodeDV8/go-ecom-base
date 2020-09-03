@@ -58,7 +58,7 @@ func (tree *LinkedTree) Delete(key string) (bool, error) {
 	return true, nil
 }
 
-// Balance - Rebalance the tree to make it more efficient
+// Balance - Re-balance the tree to make it more efficient
 func (tree *LinkedTree) Balance() (*LinkedTreeNode, error) {
 	tree.mux.Lock()
 	defer tree.mux.Unlock()
@@ -260,7 +260,7 @@ func (lt *LinkedTreeNode) findNode(key string) (*LinkedTreeNode, error) {
 	return nil, nil
 }
 
-// Balance - Rebalance the treenodes so that the searches can be even more efficient
+// Balance - Re-balance the tree nodes so that the searches can be even more efficient
 func (lt *LinkedTreeNode) Balance(size int64) (*LinkedTreeNode, int64, error) {
 	// list := make([]*LinkedTreeNode, size)
 	list := []*LinkedTreeNode{}
