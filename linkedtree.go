@@ -6,14 +6,27 @@ import (
 	"sync"
 )
 
-// TODO - Add mutex?
-
+// LinkedTree - LinkedTree struct definition
 type LinkedTree struct {
 	root  *LinkedTreeNode
 	count int64
 	mux   sync.Mutex
 }
 
+// LinkedTreeNode - LinkedTreeNode struct definition
+type LinkedTreeNode struct {
+	Parent   *LinkedTreeNode
+	Next     *LinkedTreeNode
+	Right    *LinkedTreeNode
+	Left     *LinkedTreeNode
+	Prev     *LinkedTreeNode
+	Key      string
+	Data     interface{}
+	Wildcard bool
+	Deleted  bool
+}
+
+// Add - Add a key/data-pair tho the tree
 func (tree *LinkedTree) Add(key string, data interface{}) (bool, error) {
 	tree.mux.Lock()
 	defer tree.mux.Unlock()
@@ -27,11 +40,12 @@ func (tree *LinkedTree) Add(key string, data interface{}) (bool, error) {
 	}
 	ok, err := tree.root.Add(key, data)
 	if ok == true {
-		tree.count += 1
+		tree.count++
 	}
 	return ok, err
 }
 
+// Delete - Remove a key from the tree
 func (tree *LinkedTree) Delete(key string) (bool, error) {
 	tree.mux.Lock()
 	defer tree.mux.Unlock()
@@ -44,11 +58,12 @@ func (tree *LinkedTree) Delete(key string) (bool, error) {
 	return true, nil
 }
 
+// Balance - Rebalance the tree to make it more efficient
 func (tree *LinkedTree) Balance() (*LinkedTreeNode, error) {
 	tree.mux.Lock()
 	defer tree.mux.Unlock()
 	if tree.root != nil {
-		node, err, nodeCount := tree.root.Balance(tree.count)
+		node, nodeCount, err := tree.root.Balance(tree.count)
 		tree.count = nodeCount
 		if err != nil {
 			return nil, err
@@ -59,6 +74,7 @@ func (tree *LinkedTree) Balance() (*LinkedTreeNode, error) {
 	return nil, fmt.Errorf("Can't balance a tree without a root node")
 }
 
+// GetRootNode - Find and return the root node of the tree
 func (tree *LinkedTree) GetRootNode() (*LinkedTreeNode, error) {
 	tree.mux.Lock()
 	defer tree.mux.Unlock()
@@ -68,6 +84,8 @@ func (tree *LinkedTree) GetRootNode() (*LinkedTreeNode, error) {
 	return nil, fmt.Errorf("Can't get a node from a tree without a root node")
 }
 
+// GetFirstNode - Find and return the left most node of the tree
+// This node is the first in the linked list
 func (tree *LinkedTree) GetFirstNode() (*LinkedTreeNode, error) {
 	tree.mux.Lock()
 	defer tree.mux.Unlock()
@@ -77,6 +95,8 @@ func (tree *LinkedTree) GetFirstNode() (*LinkedTreeNode, error) {
 	return nil, fmt.Errorf("Can't get a node from a tree without a root node")
 }
 
+// GetLastNode - Find and return the right most node of the tree
+// This node is the last in the linked list
 func (tree *LinkedTree) GetLastNode() (*LinkedTreeNode, error) {
 	tree.mux.Lock()
 	defer tree.mux.Unlock()
@@ -86,6 +106,7 @@ func (tree *LinkedTree) GetLastNode() (*LinkedTreeNode, error) {
 	return nil, fmt.Errorf("Can't get a node from a tree without a root node")
 }
 
+// FindNode - Find and return the node that matches the key given as argument
 func (tree *LinkedTree) FindNode(key string) (*LinkedTreeNode, error) {
 	tree.mux.Lock()
 	defer tree.mux.Unlock()
@@ -95,18 +116,7 @@ func (tree *LinkedTree) FindNode(key string) (*LinkedTreeNode, error) {
 	return nil, fmt.Errorf("Can't search a tree without a root node")
 }
 
-type LinkedTreeNode struct {
-	Parent   *LinkedTreeNode
-	Next     *LinkedTreeNode
-	Right    *LinkedTreeNode
-	Left     *LinkedTreeNode
-	Prev     *LinkedTreeNode
-	Key      string
-	Data     interface{}
-	Wildcard bool
-	Deleted  bool
-}
-
+// Add - Add a new node with a key and some data
 func (lt *LinkedTreeNode) Add(key string, data interface{}) (bool, error) {
 	if lt.Parent != nil {
 		return lt.Parent.Add(key, data)
@@ -168,6 +178,7 @@ func (lt *LinkedTreeNode) add(key string, data interface{}) (bool, error) {
 	return lt.Right.add(key, data)
 }
 
+// GetFirstNode - Find the left most node in the tree
 func (lt *LinkedTreeNode) GetFirstNode() (*LinkedTreeNode, error) {
 	root, err := lt.GetRootNode()
 	if err != nil {
@@ -183,6 +194,7 @@ func (lt *LinkedTreeNode) getFirstNode() (*LinkedTreeNode, error) {
 	return lt.Left.getFirstNode()
 }
 
+// GetRootNode - Find the root node in the tree
 func (lt *LinkedTreeNode) GetRootNode() (*LinkedTreeNode, error) {
 	return lt.getRootNode()
 }
@@ -194,6 +206,7 @@ func (lt *LinkedTreeNode) getRootNode() (*LinkedTreeNode, error) {
 	return lt.Parent.getRootNode()
 }
 
+// GetLastNode - Find the right most node in the tree
 func (lt *LinkedTreeNode) GetLastNode() (*LinkedTreeNode, error) {
 	root, err := lt.GetRootNode()
 	if err != nil {
@@ -209,6 +222,7 @@ func (lt *LinkedTreeNode) getLastNode() (*LinkedTreeNode, error) {
 	return lt.Right.getLastNode()
 }
 
+// FindNode - Find the node that matches the key given as an argument
 func (lt *LinkedTreeNode) FindNode(key string) (*LinkedTreeNode, error) {
 	root, err := lt.GetRootNode()
 	if err != nil {
@@ -246,12 +260,13 @@ func (lt *LinkedTreeNode) findNode(key string) (*LinkedTreeNode, error) {
 	return nil, nil
 }
 
-func (lt *LinkedTreeNode) Balance(size int64) (*LinkedTreeNode, error, int64) {
+// Balance - Rebalance the treenodes so that the searches can be even more efficient
+func (lt *LinkedTreeNode) Balance(size int64) (*LinkedTreeNode, int64, error) {
 	// list := make([]*LinkedTreeNode, size)
 	list := []*LinkedTreeNode{}
 	node, err := lt.GetFirstNode()
 	if err != nil {
-		return nil, err, 0
+		return nil, 0, err
 	}
 	var nodeCount int64 = 0
 	for node != nil {
@@ -265,7 +280,7 @@ func (lt *LinkedTreeNode) Balance(size int64) (*LinkedTreeNode, error, int64) {
 		node = node.Next
 	}
 	node, err = lt.balance(list)
-	return node, err, nodeCount
+	return node, nodeCount, err
 }
 
 func (lt *LinkedTreeNode) balance(list []*LinkedTreeNode) (*LinkedTreeNode, error) {
@@ -302,7 +317,7 @@ func (lt *LinkedTreeNode) balance(list []*LinkedTreeNode) (*LinkedTreeNode, erro
 			base += 2
 		} else if base < listLength {
 			newList = append(newList, list[base])
-			base += 1
+			base++
 		}
 	}
 	return lt.balance(newList)
